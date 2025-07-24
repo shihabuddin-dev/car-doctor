@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
 const NavBar = () => {
-    const {data:session, status}=useSession()
+    const { data: session, status } = useSession()
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -23,8 +23,16 @@ const NavBar = () => {
 
     const buttons =
         <div className='space-x-2'>
-            {status=='authenticated'? <button className='btn-sm btn btn-primary rounded-md' onClick={() => signOut()}>Log Out </button> :<><Link href='/login'><button className='btn-sm btn hover:btn-primary rounded-md'>login</button></Link>
-            <Link href='/register'><button className='btn-sm btn hover:btn-primary rounded-md'>Register</button></Link></> }
+            {status == 'authenticated' ? <>
+                <Image
+                    src={session?.user?.image}
+                    width={50}
+                    height={50}
+                    alt="user-logo"
+                />
+                <button className='btn-sm btn btn-primary rounded-md' onClick={() => signOut()}>Log Out </button>
+            </> : <><Link href='/login'><button className='btn-sm btn hover:btn-primary rounded-md'>login</button></Link>
+                <Link href='/register'><button className='btn-sm btn hover:btn-primary rounded-md'>Register</button></Link></>}
         </div>
 
 

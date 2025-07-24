@@ -3,7 +3,7 @@ import dbConnect, { collectionNameObj } from "@/lib/dbConnect";
 import bcrypt from "bcrypt";
 
 export const registerUser = async (payload) => {
-    const userCollection = dbConnect(collectionNameObj.userCollection)
+    const userCollection = await dbConnect(collectionNameObj.userCollection)
 
     // Validation
     const { email, password } = payload;
